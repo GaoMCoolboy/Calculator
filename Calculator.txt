@@ -1,0 +1,48 @@
+#include <stdio.h>
+int main()
+{
+    char command_begin; /*开始字符*/
+    double first_number;  /*第1个数*/
+    char character;  /*运算符(+、-、*、/)*/
+    double second_number; /*第2个数*/
+    double value;  /*计算结果*/
+    printf("简单计算器程序\n----------------\n");
+    printf("在'>' 提示后输入一个命令字符\n"); /*输出提示信息*/
+    printf("是否开始？(Y/N)>");  /*输出提示信息*/
+    scanf("%c",&command_begin);  /*输入Y/N; */
+    while(command_begin=='Y'||command_begin=='y')   /*当接收Y/y命令时执行计算器程序*/
+    {  
+        printf("请输入一个简单的算式：");  /*输出提示信息*/
+        scanf("%lf%c%lf",&first_number,&character,&second_number);  /*输入一个算式*/
+        switch(character)  /*判断switch语句的处理命令*/
+        {
+            case '+':  /*当输入运算符为“+”时，执行如下语句*/
+                value=first_number+second_number; /*进行加法运算*/
+                printf("等于%lf\n",value);
+                break;  /*转向switch语句的下一条语句*/
+            case '-':  /*当输入运算符为“-”时，执行如下语句*/
+                value=first_number-second_number; /*进行减法运算*/
+                printf("等于%lf\n",value);
+                break;  /*转向switch语句的下一条语句*/
+            case '*':  /*当输入运算符为“*”时，执行如下语句*/
+                value=first_number*second_number; /*进行乘法运算*/
+                printf("等于%lf\n",value);
+                break;  /*转向switch语句的下一条语句*/
+            case '/':  /*当输入运算符为“/”时，执行如下语句*/
+                while(second_number==0)  /*若除数为零，重新输入算式，直到除数不为零为止*/
+                {
+                    printf("除数为零,请输入一个算式："); /*输出提示信息*/
+                    scanf("%lf%c%lf",&first_number,&character,&second_number); /*输入一个算式*/
+                }
+                value=first_number/second_number; /*进行除法运算*/
+                printf("等于%lf\n",value);
+                break;  /*转向switch语句的下一条语句*/
+            default:
+               printf("非法输入!\n");  /*当输入命令为其他字符时，执行如下语句*/
+        }  /*结束switch语句*/
+        printf("是否继续运算？(Y/N)>");  /*输出提示信息*/
+        fflush(stdin);  /*清空缓冲区*/
+        scanf("%c",&command_begin);  /*输入命令类型如y/Y*/
+    }  /*结束while循环语句*/
+    printf("程序退出！\n");  /*退出循环时显示提示信息*/
+}
